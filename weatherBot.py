@@ -5,13 +5,17 @@ from pyowm.owm import OWM
 from pyowm.utils import timestamps
 from config import host, user, password, db_name
 
-
+# connect bot
 bot = telebot.TeleBot("YOUR TOKEN BOT", parse_mode=None)
+
+# connect OWM
 owm = OWM('YOUR TOKEN OWM')
+
+# Edit ur city
 current_city_for_search = 'Yaroslavl'   # можно поменять город / choose ur city
 mgr = owm.weather_manager()
 
-#Получаем погоду сейчас
+# get weather NOW
 def weather_at_now(city):
     weather = mgr.weather_at_place(city).weather
     temp = weather.temperature('celsius')["temp"]
@@ -19,7 +23,7 @@ def weather_at_now(city):
     detailedStatus = weather.detailed_status
     return temp, status, detailedStatus
 
-#Получаем погоду через 3 часа
+# get weather OF NEXT THREE HOURS
 def weather_at_three_h(city):
     three_h_forecaster = mgr.forecast_at_place(city, '3h')
     next_three_hours = timestamps.next_three_hours()
@@ -29,7 +33,7 @@ def weather_at_three_h(city):
     temp_at_three = weather_at_three.temperature('celsius')["temp"]
     return temp_at_three, weather_at_three_status, weather_at_three_detailed_status, 
 
-#Генерируем ответ
+# generate answer 
 def generate_answer(weather_at_now, weather_at_three_h):
     answer = "Доброе утро\n\n"
 

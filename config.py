@@ -10,6 +10,8 @@ db_name = ""
 # запросы на создание бд подобной моей 
 # request to DB 
 
+
+############################################################################################
 # create table
 
 # create_table_query = "CREATE TABLE Users (id INT AUTO_INCREMENT PRIMARY KEY, \
@@ -18,7 +20,7 @@ db_name = ""
 # cursor.execute(create_table_query)
 # print("table create")
 
-
+############################################################################################
 # insert data
 
 # with connection.cursor() as cursor:
@@ -26,7 +28,7 @@ db_name = ""
 #     cursor.execute(insert_query)
 #     print("aleks - inserted")
 
-
+############################################################################################
 # select from table
 
 # with connection.cursor() as cursor:

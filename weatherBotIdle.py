@@ -3,8 +3,10 @@ from telebot import types
 import pymysql
 from config import host, user, password, db_name
 
+# connect bot with token
 bot = telebot.TeleBot("YOUR TOKEN BOT", parse_mode=None)
 
+# set buttons and start-message
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = telebot.types.InlineKeyboardMarkup()
@@ -12,6 +14,8 @@ def start(message):
     markup.add(telebot.types.InlineKeyboardButton(text='Задать вопрос', callback_data="question"))
     bot.send_message(message.chat.id, text="Привет, {0.first_name}! Я тестовый бот для рассылки погоды Ярославля".format(message.from_user), reply_markup=markup)
     name = message.from_user.first_name
+
+# mailing list connection with id
 @bot.callback_query_handler(func=lambda call: True)
 def save_me(call):
     if call.data == 'save_me':
@@ -44,9 +48,11 @@ def save_me(call):
             print(ex)
             bot.send_message(call.message.chat.id, "Произошла ошибка, возможно вы уже подключены на рассылку!")
 
+    # question button
     elif call.data == 'question':
         bot.send_message(call.message.chat.id, "Все вопросы к моему папочке: https://t.me/das322")
 
+# undefiend message
 @bot.message_handler(content_types=['text'])
 def error(message):
     bot.send_message(message.chat.id, "Я тебя не понял, для того чтобы начать использовать меня напиши /start")
